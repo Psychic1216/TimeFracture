@@ -17,7 +17,10 @@
 <img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot4.png">
 
 <h2>Requirements</h2>
+
 <a href="https://www.python.org/downloads/">Python Download</a>
+
+
 
 
 <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame">PyGame Download</a>
