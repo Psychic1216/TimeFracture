@@ -5,7 +5,7 @@
 <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame">PyGame</a>
 <a href="https://youtu.be/_GikMdhAhv0">How To Install</a>
 
-
+<h2>Screenshots</h2>
 <img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot.png">
 <img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot1.png">
 <img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot2.png">
@@ -13,12 +13,12 @@
 
 
 <p>
-  Game Story:
+  <h2>Game Story</h2>
   You are a man named William Jackson who is an elite agent that is given special extraordinary time powers. You came from the future and  time traveled into the past. Your mission is to prevent suffering in the human world by taking out a powerful international company     named Micron and it’s leader. To do this you must fight your way through the city, get in Micron’s headquarters and clear it out. If you  successfully complete this important mission, you saved the future of mankind. But if not, then no one knows what will stop this from ever  happening and and will keep on going even further. 
 </p>
 
 <p>
-  Game Play:
+  <h2>Game Play</h2>
   The way how the game play will work for our game is that it will be a sci-fi, action,
 and shooter game. There will be multiple levels in the game and the last level is the
 boss fight, these levels will be in box like areas where the level will get harder as you
