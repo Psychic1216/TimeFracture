@@ -1,4 +1,3 @@
-<h2>Clear Vision Studio Presents:</h2>
 # TimeFracture
 
 <h2>Requirements</h2>
