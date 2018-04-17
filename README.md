@@ -6,7 +6,7 @@
 <a href="https://youtu.be/_GikMdhAhv0">How To Install</a>
 
 
-<img source="
+<img source="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot.png">
 
 
 <p>
