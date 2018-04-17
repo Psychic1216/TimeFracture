@@ -1,12 +1,9 @@
 # TimeFracture
 
-
-
 <p>
   <h2>Game Story</h2>
   You are a man named William Jackson who is an elite agent that is given special extraordinary time powers. You came from the future and  time traveled into the past. Your mission is to prevent suffering in the human world by taking out a powerful international company named Micron and it’s leader. To do this you must fight your way through the city, get in Micron’s headquarters and clear it out. If you successfully complete this important mission, you saved the future of mankind. But if not, then no one knows what will stop this terror from ever happening and on going even further.
 </p>
-
 
 <p>
   <h2>Game Description</h2>
