@@ -77,7 +77,7 @@ controls1.visible=False
 controls2.visible=False
 story1.visible=False
 blackbackground.visible=False
-forcefield.visible = False
+forcefield.visible=False
 title.y-=250
 companyname.resizeBy(-50)
 companyname.y+=380
@@ -170,6 +170,8 @@ bullet3.resizeBy(-85)
 bullet3.moveTo(enemy2.x,enemy2.y)
 bullet3.visible=False
 aim.resizeBy(-79)
+timeblast.visible=False
+timeblast.resizeBy(-35)
 
 #Health Packs
 healthpacks=[]
@@ -246,6 +248,7 @@ death=Sound("death.wav",2)
 pickup=Sound("pickup.wav",3)
 damage=Sound("damage.wav",4)
 selection=Sound("selection.wav",5)
+timeblastsound=Sound("timeblast.wav",6)
 
 #Startup Screen
 meunMusic()
@@ -684,7 +687,7 @@ jumpboost=100
 enemyfire=0
 enemyfire1=0
 enemyfire2=0
-forcefieldtime=1000
+forcefieldtime=1500
 
 game.viewMouse(False)
 
@@ -703,10 +706,12 @@ while not game.over:
     unmute.draw()
     level2.draw()
     bullet.move()
+    timeblast.move()
+    
     if forcefield.visible:
         forcefield.move()
         forcefield.moveTo(wjwalk.x,wjwalk.y)
-        forcefieldtime -= 1
+        forcefieldtime-=1
     
     enemy.move()
     x=randint(1,3)
@@ -840,7 +845,7 @@ while not game.over:
 
     if keys.Pressed[K_SPACE]:
         bullet.moveTo(wjwalk.x+15,wjwalk.y-30)
-        angleToCrosshair = bullet.angleTo(aim)
+        angleToCrosshair=bullet.angleTo(aim)
         bullet.setSpeed(6.7,angleToCrosshair)
         bullet.visible=True
         gun.play()
@@ -868,7 +873,8 @@ while not game.over:
         bullet.moveTo(wjwalk.x+15,wjwalk.y-30)
 
     if keys.Pressed[K_LCTRL]:
-        forcefield.visible= not forcefield.visible
+        forcefield.visible=not forcefield.visible
+        powerlevel-=10
 
     if forcefieldtime<0:
         forcefield.visible=False
@@ -877,7 +883,70 @@ while not game.over:
         bullet1.visible=False
         bullet2.visible=False
         bullet3.visible=False
-    
+
+    if keys.Pressed[K_LALT]:
+        timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
+        angleToCrosshair=timeblast.angleTo(aim)
+        timeblast.setSpeed(7.5,angleToCrosshair)
+        timeblast.visible=True
+        timeblastsound.play()
+        powerlevel-=20
+
+    if timeblast.collidedWith(enemy):
+        bullet1.moveTo(enemy.x,enemy.y)
+        x=randint(1500,1600)
+        enemy.moveTo(x,660)
+
+    if timeblast.collidedWith(enemy1):
+        bullet2.moveTo(enemy1.x,enemy1.y)
+        x=randint(1550,1650)
+        enemy1.moveTo(x,660)
+        
+    if timeblast.collidedWith(enemy2):
+        bullet3.moveTo(enemy2.x,enemy2.y)
+        x=randint(1620,1700)
+        enemy2.moveTo(x,660)
+
+    if timeblast.x>1500:
+        timeblast.visible=False
+        timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
+
+    if keys.Pressed[K_LSHIFT]:
+        bullet1.setSpeed(1.8,90)
+        bullet2.setSpeed(1.8,90)
+        bullet3.setSpeed(1.8,90)
+        enemy.setSpeed(1,90)
+        enemy1.setSpeed(1,90)
+        enemy2.setSpeed(1,90)
+        powerlevel-=1
+
+    if not keys.Pressed[K_LSHIFT]:
+        bullet1.setSpeed(5.3,90)
+        bullet2.setSpeed(5.3,90)
+        bullet3.setSpeed(5.3,90)
+        x=randint(1,3)
+        enemy.setSpeed(x,90)
+        y=randint(2,4)
+        enemy1.setSpeed(y,90)
+        enemy2.setSpeed(2,90)
+
+    if powerlevel<0:
+        if keys.Pressed[K_LSHIFT]:
+            bullet1.setSpeed(5.3,90)
+            bullet2.setSpeed(5.3,90)
+            bullet3.setSpeed(5.3,90)
+            x=randint(1,3)
+            enemy.setSpeed(x,90)
+            y=randint(2,4)
+            enemy1.setSpeed(y,90)
+            enemy2.setSpeed(2,90)
+
+        if keys.Pressed[K_LALT]:
+            timeblast.visible=False
+
+        if keys.Pressed[K_LCTRL]:
+            forcefield.visible=False
+             
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
         game.update(101)
@@ -971,12 +1040,13 @@ playbossMusic()
 game.setBackground(labbackground)
 labbackground.resizeTo(1480,820)
 
-time=3250
+time=3850
 
 jumpboost=100
 enemyfire=0
 enemyfire1=0
 enemyfire2=0
+forcefieldtime=1500
 
 enemy.moveTo(1690,715)
 enemy1.moveTo(1750,715)
@@ -999,6 +1069,15 @@ while not game.over:
     bullet.move()
     aim.draw()
     aim.moveTo(mouse.x-53,mouse.y)
+    timeblast.move()
+    enemy.visible=True
+    enemy1.visible=True
+    enemy2.visible=True
+
+    if forcefield.visible:
+        forcefield.move()
+        forcefield.moveTo(wjwalk.x,wjwalk.y)
+        forcefieldtime-=1
 
     for index in range(10):
         healthpacks[index].move()
@@ -1254,6 +1333,81 @@ while not game.over:
     if bullet.x>1450:
         bullet.visible=False
         bullet.moveTo(wjwalk.x+15,wjwalk.y-30)
+
+    if keys.Pressed[K_LCTRL]:
+        forcefield.visible=not forcefield.visible
+
+    if forcefieldtime<0:
+        forcefield.visible=False
+        powerlevel-=10
+
+    if bullet1.collidedWith(forcefield,"circle") or bullet2.collidedWith(forcefield,"circle") or bullet3.collidedWith(forcefield,"circle"):
+        bullet1.visible=False
+        bullet2.visible=False
+        bullet3.visible=False
+
+    if keys.Pressed[K_LALT]:
+        timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
+        angleToCrosshair=timeblast.angleTo(aim)
+        timeblast.setSpeed(7.5,angleToCrosshair)
+        timeblast.visible=True
+        timeblastsound.play()
+        powerlevel-=20
+
+    if timeblast.collidedWith(enemy):
+        bullet1.moveTo(enemy.x,enemy.y)
+        x=randint(1500,1600)
+        enemy.moveTo(x,715)
+
+    if timeblast.collidedWith(enemy1):
+        bullet2.moveTo(enemy1.x,enemy1.y)
+        x=randint(1550,1650)
+        enemy1.moveTo(x,715)
+        
+    if timeblast.collidedWith(enemy2):
+        bullet3.moveTo(enemy2.x,enemy2.y)
+        x=randint(1620,1700)
+        enemy2.moveTo(x,715)
+
+    if timeblast.x>1500:
+        timeblast.visible=False
+        timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
+
+    if keys.Pressed[K_LSHIFT]:
+        bullet1.setSpeed(1.8,90)
+        bullet2.setSpeed(1.8,90)
+        bullet3.setSpeed(1.8,90)
+        enemy.setSpeed(1,90)
+        enemy1.setSpeed(1,90)
+        enemy2.setSpeed(1,90)
+        powerlevel-=1
+
+    if not keys.Pressed[K_LSHIFT]:
+        bullet1.setSpeed(5.3,90)
+        bullet2.setSpeed(5.3,90)
+        bullet3.setSpeed(5.3,90)
+        x=randint(1,3)
+        enemy.setSpeed(x,90)
+        y=randint(2,4)
+        enemy1.setSpeed(y,90)
+        enemy2.setSpeed(2,90)
+
+    if powerlevel<0:
+        if keys.Pressed[K_LSHIFT]:
+            bullet1.setSpeed(5.3,90)
+            bullet2.setSpeed(5.3,90)
+            bullet3.setSpeed(5.3,90)
+            x=randint(1,3)
+            enemy.setSpeed(x,90)
+            y=randint(2,4)
+            enemy1.setSpeed(y,90)
+            enemy2.setSpeed(2,90)
+
+        if keys.Pressed[K_LALT]:
+            timeblast.visible=False
+
+        if keys.Pressed[K_LCTRL]:
+            forcefield.visible=False
     
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
