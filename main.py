@@ -207,6 +207,38 @@ for index in range(10):
     healthpacks2[index].setSpeed(z,180)
     healthpacks2[index].resizeBy(-80)
 
+healthpacks3=[]
+for index in range(10):
+    healthpacks3.append(Image("healthpack.png",game,use_alpha = False))
+
+for index in range(10):
+    x=randint(100,1300)
+    z=randint(1,3)
+    healthpacks3[index].moveTo(x,-950)
+    healthpacks3[index].setSpeed(z,180)
+    healthpacks3[index].resizeBy(-80)
+
+healthpacks4=[]
+for index in range(10):
+    healthpacks4.append(Image("healthpack.png",game,use_alpha = False))
+
+for index in range(10):
+    x=randint(100,1300)
+    z=randint(1,3)
+    healthpacks4[index].moveTo(x,-1450)
+    healthpacks4[index].setSpeed(z,180)
+    healthpacks4[index].resizeBy(-80)
+
+healthpacks5=[]
+for index in range(10):
+    healthpacks5.append(Image("healthpack.png",game,use_alpha = False))
+
+for index in range(10):
+    x=randint(100,1300)
+    z=randint(1,3)
+    healthpacks5[index].moveTo(x,-1680)
+    healthpacks5[index].setSpeed(z,180)
+    healthpacks5[index].resizeBy(-80)
 
 #Power Packs
 powerpacks=[]
@@ -241,6 +273,39 @@ for index in range(10):
     powerpacks2[index].moveTo(x,-1680)
     powerpacks2[index].setSpeed(z,180)
     powerpacks2[index].resizeBy(-80)
+    
+powerpacks3=[]
+for index in range(10):
+    powerpacks3.append(Animation("magic_001.png",30,game,960/5,1152/6,4,use_alpha=False))
+
+for index in range(10):
+    x=randint(250,1300)
+    z=randint(1,3)
+    powerpacks3[index].moveTo(x,-950)
+    powerpacks3[index].setSpeed(z,180)
+    powerpacks3[index].resizeBy(-80)
+
+powerpacks4=[]
+for index in range(10):
+    powerpacks4.append(Animation("magic_001.png",30,game,960/5,1152/6,4,use_alpha=False))
+
+for index in range(10):
+    x=randint(250,1300)
+    z=randint(1,3)
+    powerpacks4[index].moveTo(x,-1450)
+    powerpacks4[index].setSpeed(z,180)
+    powerpacks4[index].resizeBy(-80)
+
+powerpacks5=[]
+for index in range(10):
+    powerpacks5.append(Animation("magic_001.png",30,game,960/5,1152/6,4,use_alpha=False))
+
+for index in range(10):
+    x=randint(250,1300)
+    z=randint(1,3)
+    powerpacks5[index].moveTo(x,-1680)
+    powerpacks5[index].setSpeed(z,180)
+    powerpacks5[index].resizeBy(-80)
 
 #Sounds
 gun=Sound("Gun.wav",1)
@@ -1080,100 +1145,100 @@ while not game.over:
         forcefieldtime-=1
 
     for index in range(10):
-        healthpacks[index].move()
+        healthpacks3[index].move()
 
-        if healthpacks[index].collidedWith(wjwalk,"rectangle"):
+        if healthpacks3[index].collidedWith(wjwalk,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks[index].visible=False
+            healthpacks3[index].visible=False
 
-        if healthpacks[index].collidedWith(wjjump,"rectangle"):
+        if healthpacks3[index].collidedWith(wjjump,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks[index].visible=False
+            healthpacks3[index].visible=False
 
-        if healthpacks[index].y>730:
-            healthpacks[index].visible=False
+        if healthpacks3[index].y>730:
+            healthpacks3[index].visible=False
 
     for index in range(10):
-        healthpacks1[index].move()
+        healthpacks4[index].move()
 
-        if healthpacks1[index].collidedWith(wjwalk,"rectangle"):
+        if healthpacks4[index].collidedWith(wjwalk,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks1[index].visible=False
+            healthpacks4[index].visible=False
 
-        if healthpacks1[index].collidedWith(wjjump,"rectangle"):
+        if healthpacks4[index].collidedWith(wjjump,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks1[index].visible=False
+            healthpacks4[index].visible=False
 
-        if healthpacks1[index].y>730:
-            healthpacks1[index].visible=False
+        if healthpacks4[index].y>730:
+            healthpacks4[index].visible=False
 
     for index in range(10):
-        healthpacks2[index].move()
+        healthpacks5[index].move()
 
-        if healthpacks2[index].collidedWith(wjwalk,"rectangle"):
+        if healthpacks5[index].collidedWith(wjwalk,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks2[index].visible=False
+            healthpacks5[index].visible=False
 
-        if healthpacks2[index].collidedWith(wjjump,"rectangle"):
+        if healthpacks5[index].collidedWith(wjjump,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks2[index].visible=False
+            healthpacks5[index].visible=False
 
-        if healthpacks2[index].y>730:
-            healthpacks2[index].visible=False
+        if healthpacks5[index].y>730:
+            healthpacks5[index].visible=False
             
     for index in range(10):
-        powerpacks[index].move()
+        powerpacks3[index].move()
 
-        if powerpacks[index].collidedWith(wjwalk,"rectangle"):
+        if powerpacks3[index].collidedWith(wjwalk,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks[index].visible=False
+            powerpacks3[index].visible=False
 
-        if powerpacks[index].collidedWith(wjjump,"rectangle"):
+        if powerpacks3[index].collidedWith(wjjump,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks[index].visible=False
+            powerpacks3[index].visible=False
 
-        if powerpacks[index].y>730:
-            powerpacks[index].visible=False
+        if powerpacks3[index].y>730:
+            powerpacks3[index].visible=False
 
     for index in range(10):
-        powerpacks1[index].move()
+        powerpacks4[index].move()
 
-        if powerpacks1[index].collidedWith(wjwalk,"rectangle"):
+        if powerpacks4[index].collidedWith(wjwalk,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks1[index].visible=False
+            powerpacks4[index].visible=False
 
-        if powerpacks1[index].collidedWith(wjjump,"rectangle"):
+        if powerpacks4[index].collidedWith(wjjump,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks1[index].visible=False
+            powerpacks4[index].visible=False
 
-        if powerpacks1[index].y>730:
-            powerpacks1[index].visible=False
+        if powerpacks4[index].y>730:
+            powerpacks4[index].visible=False
 
     for index in range(10):
-        powerpacks2[index].move()
+        powerpacks5[index].move()
 
-        if powerpacks2[index].collidedWith(wjwalk,"rectangle"):
+        if powerpacks5[index].collidedWith(wjwalk,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks2[index].visible=False
+            powerpacks5[index].visible=False
 
-        if powerpacks2[index].collidedWith(wjjump,"rectangle"):
+        if powerpacks5[index].collidedWith(wjjump,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks2[index].visible=False
+            powerpacks5[index].visible=False
 
-        if powerpacks2[index].y>730:
-            powerpacks2[index].visible=False
+        if powerpacks5[index].y>730:
+            powerpacks5[index].visible=False
     
     enemy.move()
     x=randint(1,3)
