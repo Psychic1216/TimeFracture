@@ -14,7 +14,9 @@
 <img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot.png">
 <img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot1.png">
 <img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot2.png">
+<img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot5.png">
 <img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot4.png">
+<img src="https://github.com/TimothyNg5808/TimeFracture/blob/master/gamescreenshot6.png">
 
 <h2>Requirements</h2>
 
