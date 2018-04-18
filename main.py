@@ -59,6 +59,8 @@ page2=Image("2.png",game)
 page3=Image("3.png",game)
 returnmenu=Image("Return-To-Menu.png",game)
 aim=Image("aim2.png",game)
+forcefield=Animation("forcefield.png",20,game,960/5,768/4,8)
+timeblast=Animation("timeblast.png",10,game,640/10,64)
 
 game.setBackground(citybackground)
 citybackground.resizeTo(1480,820)
@@ -75,6 +77,7 @@ controls1.visible=False
 controls2.visible=False
 story1.visible=False
 blackbackground.visible=False
+forcefield.visible = False
 title.y-=250
 companyname.resizeBy(-50)
 companyname.y+=380
@@ -681,6 +684,7 @@ jumpboost=100
 enemyfire=0
 enemyfire1=0
 enemyfire2=0
+forcefieldtime=1000
 
 game.viewMouse(False)
 
@@ -699,6 +703,10 @@ while not game.over:
     unmute.draw()
     level2.draw()
     bullet.move()
+    if forcefield.visible:
+        forcefield.move()
+        forcefield.moveTo(wjwalk.x,wjwalk.y)
+        forcefieldtime -= 1
     
     enemy.move()
     x=randint(1,3)
@@ -858,6 +866,17 @@ while not game.over:
     if bullet.x>1450:
         bullet.visible=False
         bullet.moveTo(wjwalk.x+15,wjwalk.y-30)
+
+    if keys.Pressed[K_LCTRL]:
+        forcefield.visible= not forcefield.visible
+
+    if forcefieldtime<0:
+        forcefield.visible=False
+
+    if bullet1.collidedWith(forcefield,"circle") or bullet2.collidedWith(forcefield,"circle") or bullet3.collidedWith(forcefield,"circle"):
+        bullet1.visible=False
+        bullet2.visible=False
+        bullet3.visible=False
     
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
