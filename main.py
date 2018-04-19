@@ -59,8 +59,6 @@ page2=Image("2.png",game)
 page3=Image("3.png",game)
 returnmenu=Image("Return-To-Menu.png",game)
 aim=Image("aim2.png",game)
-forcefield=Animation("forcefield.png",20,game,960/5,768/4,8)
-timeblast=Animation("timeblast.png",10,game,640/10,64)
 
 game.setBackground(citybackground)
 citybackground.resizeTo(1480,820)
@@ -77,7 +75,6 @@ controls1.visible=False
 controls2.visible=False
 story1.visible=False
 blackbackground.visible=False
-forcefield.visible=False
 title.y-=250
 companyname.resizeBy(-50)
 companyname.y+=380
@@ -170,8 +167,6 @@ bullet3.resizeBy(-85)
 bullet3.moveTo(enemy2.x,enemy2.y)
 bullet3.visible=False
 aim.resizeBy(-79)
-timeblast.visible=False
-timeblast.resizeBy(-35)
 
 #Health Packs
 healthpacks=[]
@@ -207,38 +202,6 @@ for index in range(10):
     healthpacks2[index].setSpeed(z,180)
     healthpacks2[index].resizeBy(-80)
 
-healthpacks3=[]
-for index in range(10):
-    healthpacks3.append(Image("healthpack.png",game,use_alpha = False))
-
-for index in range(10):
-    x=randint(100,1300)
-    z=randint(1,3)
-    healthpacks3[index].moveTo(x,-950)
-    healthpacks3[index].setSpeed(z,180)
-    healthpacks3[index].resizeBy(-80)
-
-healthpacks4=[]
-for index in range(10):
-    healthpacks4.append(Image("healthpack.png",game,use_alpha = False))
-
-for index in range(10):
-    x=randint(100,1300)
-    z=randint(1,3)
-    healthpacks4[index].moveTo(x,-1450)
-    healthpacks4[index].setSpeed(z,180)
-    healthpacks4[index].resizeBy(-80)
-
-healthpacks5=[]
-for index in range(10):
-    healthpacks5.append(Image("healthpack.png",game,use_alpha = False))
-
-for index in range(10):
-    x=randint(100,1300)
-    z=randint(1,3)
-    healthpacks5[index].moveTo(x,-1680)
-    healthpacks5[index].setSpeed(z,180)
-    healthpacks5[index].resizeBy(-80)
 
 #Power Packs
 powerpacks=[]
@@ -273,39 +236,6 @@ for index in range(10):
     powerpacks2[index].moveTo(x,-1680)
     powerpacks2[index].setSpeed(z,180)
     powerpacks2[index].resizeBy(-80)
-    
-powerpacks3=[]
-for index in range(10):
-    powerpacks3.append(Animation("magic_001.png",30,game,960/5,1152/6,4,use_alpha=False))
-
-for index in range(10):
-    x=randint(250,1300)
-    z=randint(1,3)
-    powerpacks3[index].moveTo(x,-950)
-    powerpacks3[index].setSpeed(z,180)
-    powerpacks3[index].resizeBy(-80)
-
-powerpacks4=[]
-for index in range(10):
-    powerpacks4.append(Animation("magic_001.png",30,game,960/5,1152/6,4,use_alpha=False))
-
-for index in range(10):
-    x=randint(250,1300)
-    z=randint(1,3)
-    powerpacks4[index].moveTo(x,-1450)
-    powerpacks4[index].setSpeed(z,180)
-    powerpacks4[index].resizeBy(-80)
-
-powerpacks5=[]
-for index in range(10):
-    powerpacks5.append(Animation("magic_001.png",30,game,960/5,1152/6,4,use_alpha=False))
-
-for index in range(10):
-    x=randint(250,1300)
-    z=randint(1,3)
-    powerpacks5[index].moveTo(x,-1680)
-    powerpacks5[index].setSpeed(z,180)
-    powerpacks5[index].resizeBy(-80)
 
 #Sounds
 gun=Sound("Gun.wav",1)
@@ -313,7 +243,6 @@ death=Sound("death.wav",2)
 pickup=Sound("pickup.wav",3)
 damage=Sound("damage.wav",4)
 selection=Sound("selection.wav",5)
-timeblastsound=Sound("timeblast.wav",6)
 
 #Startup Screen
 meunMusic()
@@ -752,7 +681,6 @@ jumpboost=100
 enemyfire=0
 enemyfire1=0
 enemyfire2=0
-forcefieldtime=1500
 
 game.viewMouse(False)
 
@@ -771,12 +699,6 @@ while not game.over:
     unmute.draw()
     level2.draw()
     bullet.move()
-    timeblast.move()
-    
-    if forcefield.visible:
-        forcefield.move()
-        forcefield.moveTo(wjwalk.x,wjwalk.y)
-        forcefieldtime-=1
     
     enemy.move()
     x=randint(1,3)
@@ -910,7 +832,7 @@ while not game.over:
 
     if keys.Pressed[K_SPACE]:
         bullet.moveTo(wjwalk.x+15,wjwalk.y-30)
-        angleToCrosshair=bullet.angleTo(aim)
+        angleToCrosshair = bullet.angleTo(aim)
         bullet.setSpeed(6.7,angleToCrosshair)
         bullet.visible=True
         gun.play()
@@ -936,82 +858,7 @@ while not game.over:
     if bullet.x>1450:
         bullet.visible=False
         bullet.moveTo(wjwalk.x+15,wjwalk.y-30)
-
-    if keys.Pressed[K_LCTRL]:
-        forcefield.visible=not forcefield.visible
-        powerlevel-=10
-
-    if forcefieldtime<0:
-        forcefield.visible=False
-
-    if bullet1.collidedWith(forcefield,"circle") or bullet2.collidedWith(forcefield,"circle") or bullet3.collidedWith(forcefield,"circle"):
-        bullet1.visible=False
-        bullet2.visible=False
-        bullet3.visible=False
-
-    if keys.Pressed[K_LALT]:
-        timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
-        angleToCrosshair=timeblast.angleTo(aim)
-        timeblast.setSpeed(7.5,angleToCrosshair)
-        timeblast.visible=True
-        timeblastsound.play()
-        powerlevel-=20
-
-    if timeblast.collidedWith(enemy):
-        bullet1.moveTo(enemy.x,enemy.y)
-        x=randint(1500,1600)
-        enemy.moveTo(x,660)
-
-    if timeblast.collidedWith(enemy1):
-        bullet2.moveTo(enemy1.x,enemy1.y)
-        x=randint(1550,1650)
-        enemy1.moveTo(x,660)
-        
-    if timeblast.collidedWith(enemy2):
-        bullet3.moveTo(enemy2.x,enemy2.y)
-        x=randint(1620,1700)
-        enemy2.moveTo(x,660)
-
-    if timeblast.x>1500:
-        timeblast.visible=False
-        timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
-
-    if keys.Pressed[K_LSHIFT]:
-        bullet1.setSpeed(1.8,90)
-        bullet2.setSpeed(1.8,90)
-        bullet3.setSpeed(1.8,90)
-        enemy.setSpeed(1,90)
-        enemy1.setSpeed(1,90)
-        enemy2.setSpeed(1,90)
-        powerlevel-=1
-
-    if not keys.Pressed[K_LSHIFT]:
-        bullet1.setSpeed(5.3,90)
-        bullet2.setSpeed(5.3,90)
-        bullet3.setSpeed(5.3,90)
-        x=randint(1,3)
-        enemy.setSpeed(x,90)
-        y=randint(2,4)
-        enemy1.setSpeed(y,90)
-        enemy2.setSpeed(2,90)
-
-    if powerlevel<0:
-        if keys.Pressed[K_LSHIFT]:
-            bullet1.setSpeed(5.3,90)
-            bullet2.setSpeed(5.3,90)
-            bullet3.setSpeed(5.3,90)
-            x=randint(1,3)
-            enemy.setSpeed(x,90)
-            y=randint(2,4)
-            enemy1.setSpeed(y,90)
-            enemy2.setSpeed(2,90)
-
-        if keys.Pressed[K_LALT]:
-            timeblast.visible=False
-
-        if keys.Pressed[K_LCTRL]:
-            forcefield.visible=False
-             
+    
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
         game.update(101)
@@ -1105,13 +952,12 @@ playbossMusic()
 game.setBackground(labbackground)
 labbackground.resizeTo(1480,820)
 
-time=3850
+time=3250
 
 jumpboost=100
 enemyfire=0
 enemyfire1=0
 enemyfire2=0
-forcefieldtime=1500
 
 enemy.moveTo(1690,715)
 enemy1.moveTo(1750,715)
@@ -1134,111 +980,102 @@ while not game.over:
     bullet.move()
     aim.draw()
     aim.moveTo(mouse.x-53,mouse.y)
-    timeblast.move()
-    enemy.visible=True
-    enemy1.visible=True
-    enemy2.visible=True
-
-    if forcefield.visible:
-        forcefield.move()
-        forcefield.moveTo(wjwalk.x,wjwalk.y)
-        forcefieldtime-=1
 
     for index in range(10):
-        healthpacks3[index].move()
+        healthpacks[index].move()
 
-        if healthpacks3[index].collidedWith(wjwalk,"rectangle"):
+        if healthpacks[index].collidedWith(wjwalk,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks3[index].visible=False
+            healthpacks[index].visible=False
 
-        if healthpacks3[index].collidedWith(wjjump,"rectangle"):
+        if healthpacks[index].collidedWith(wjjump,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks3[index].visible=False
+            healthpacks[index].visible=False
 
-        if healthpacks3[index].y>730:
-            healthpacks3[index].visible=False
+        if healthpacks[index].y>730:
+            healthpacks[index].visible=False
 
     for index in range(10):
-        healthpacks4[index].move()
+        healthpacks1[index].move()
 
-        if healthpacks4[index].collidedWith(wjwalk,"rectangle"):
+        if healthpacks1[index].collidedWith(wjwalk,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks4[index].visible=False
+            healthpacks1[index].visible=False
 
-        if healthpacks4[index].collidedWith(wjjump,"rectangle"):
+        if healthpacks1[index].collidedWith(wjjump,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks4[index].visible=False
+            healthpacks1[index].visible=False
 
-        if healthpacks4[index].y>730:
-            healthpacks4[index].visible=False
+        if healthpacks1[index].y>730:
+            healthpacks1[index].visible=False
 
     for index in range(10):
-        healthpacks5[index].move()
+        healthpacks2[index].move()
 
-        if healthpacks5[index].collidedWith(wjwalk,"rectangle"):
+        if healthpacks2[index].collidedWith(wjwalk,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks5[index].visible=False
+            healthpacks2[index].visible=False
 
-        if healthpacks5[index].collidedWith(wjjump,"rectangle"):
+        if healthpacks2[index].collidedWith(wjjump,"rectangle"):
             wjwalk.health+=10
             pickup.play()
-            healthpacks5[index].visible=False
+            healthpacks2[index].visible=False
 
-        if healthpacks5[index].y>730:
-            healthpacks5[index].visible=False
+        if healthpacks2[index].y>730:
+            healthpacks2[index].visible=False
             
     for index in range(10):
-        powerpacks3[index].move()
+        powerpacks[index].move()
 
-        if powerpacks3[index].collidedWith(wjwalk,"rectangle"):
+        if powerpacks[index].collidedWith(wjwalk,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks3[index].visible=False
+            powerpacks[index].visible=False
 
-        if powerpacks3[index].collidedWith(wjjump,"rectangle"):
+        if powerpacks[index].collidedWith(wjjump,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks3[index].visible=False
+            powerpacks[index].visible=False
 
-        if powerpacks3[index].y>730:
-            powerpacks3[index].visible=False
+        if powerpacks[index].y>730:
+            powerpacks[index].visible=False
 
     for index in range(10):
-        powerpacks4[index].move()
+        powerpacks1[index].move()
 
-        if powerpacks4[index].collidedWith(wjwalk,"rectangle"):
+        if powerpacks1[index].collidedWith(wjwalk,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks4[index].visible=False
+            powerpacks1[index].visible=False
 
-        if powerpacks4[index].collidedWith(wjjump,"rectangle"):
+        if powerpacks1[index].collidedWith(wjjump,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks4[index].visible=False
+            powerpacks1[index].visible=False
 
-        if powerpacks4[index].y>730:
-            powerpacks4[index].visible=False
+        if powerpacks1[index].y>730:
+            powerpacks1[index].visible=False
 
     for index in range(10):
-        powerpacks5[index].move()
+        powerpacks2[index].move()
 
-        if powerpacks5[index].collidedWith(wjwalk,"rectangle"):
+        if powerpacks2[index].collidedWith(wjwalk,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks5[index].visible=False
+            powerpacks2[index].visible=False
 
-        if powerpacks5[index].collidedWith(wjjump,"rectangle"):
+        if powerpacks2[index].collidedWith(wjjump,"rectangle"):
             powerlevel+=10
             pickup.play()
-            powerpacks5[index].visible=False
+            powerpacks2[index].visible=False
 
-        if powerpacks5[index].y>730:
-            powerpacks5[index].visible=False
+        if powerpacks2[index].y>730:
+            powerpacks2[index].visible=False
     
     enemy.move()
     x=randint(1,3)
@@ -1398,81 +1235,6 @@ while not game.over:
     if bullet.x>1450:
         bullet.visible=False
         bullet.moveTo(wjwalk.x+15,wjwalk.y-30)
-
-    if keys.Pressed[K_LCTRL]:
-        forcefield.visible=not forcefield.visible
-
-    if forcefieldtime<0:
-        forcefield.visible=False
-        powerlevel-=10
-
-    if bullet1.collidedWith(forcefield,"circle") or bullet2.collidedWith(forcefield,"circle") or bullet3.collidedWith(forcefield,"circle"):
-        bullet1.visible=False
-        bullet2.visible=False
-        bullet3.visible=False
-
-    if keys.Pressed[K_LALT]:
-        timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
-        angleToCrosshair=timeblast.angleTo(aim)
-        timeblast.setSpeed(7.5,angleToCrosshair)
-        timeblast.visible=True
-        timeblastsound.play()
-        powerlevel-=20
-
-    if timeblast.collidedWith(enemy):
-        bullet1.moveTo(enemy.x,enemy.y)
-        x=randint(1500,1600)
-        enemy.moveTo(x,715)
-
-    if timeblast.collidedWith(enemy1):
-        bullet2.moveTo(enemy1.x,enemy1.y)
-        x=randint(1550,1650)
-        enemy1.moveTo(x,715)
-        
-    if timeblast.collidedWith(enemy2):
-        bullet3.moveTo(enemy2.x,enemy2.y)
-        x=randint(1620,1700)
-        enemy2.moveTo(x,715)
-
-    if timeblast.x>1500:
-        timeblast.visible=False
-        timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
-
-    if keys.Pressed[K_LSHIFT]:
-        bullet1.setSpeed(1.8,90)
-        bullet2.setSpeed(1.8,90)
-        bullet3.setSpeed(1.8,90)
-        enemy.setSpeed(1,90)
-        enemy1.setSpeed(1,90)
-        enemy2.setSpeed(1,90)
-        powerlevel-=1
-
-    if not keys.Pressed[K_LSHIFT]:
-        bullet1.setSpeed(5.3,90)
-        bullet2.setSpeed(5.3,90)
-        bullet3.setSpeed(5.3,90)
-        x=randint(1,3)
-        enemy.setSpeed(x,90)
-        y=randint(2,4)
-        enemy1.setSpeed(y,90)
-        enemy2.setSpeed(2,90)
-
-    if powerlevel<0:
-        if keys.Pressed[K_LSHIFT]:
-            bullet1.setSpeed(5.3,90)
-            bullet2.setSpeed(5.3,90)
-            bullet3.setSpeed(5.3,90)
-            x=randint(1,3)
-            enemy.setSpeed(x,90)
-            y=randint(2,4)
-            enemy1.setSpeed(y,90)
-            enemy2.setSpeed(2,90)
-
-        if keys.Pressed[K_LALT]:
-            timeblast.visible=False
-
-        if keys.Pressed[K_LCTRL]:
-            forcefield.visible=False
     
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
