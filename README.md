@@ -1,4 +1,5 @@
 # TimeFracture
+By Clear Visions Studio
 
 <p>
   <h2>Game Story</h2>
