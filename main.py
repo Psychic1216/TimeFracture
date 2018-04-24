@@ -182,10 +182,10 @@ appear.resizeBy(-30)
 boss.resizeBy(-30)
 boss.x+=300
 boss.y+=230
-victoryscreen.resizeBy(-15)
-victoryscreen1.resizeBy(-15)
-victoryscreen1.y+=100
-victoryquit.resizeBy(-30)
+victoryscreen.resizeBy(-50)
+victoryscreen1.resizeBy(-50)
+victoryscreen1.y+=45
+victoryquit.resizeBy(-45)
 victoryquit.y+=150
 
 #Health Packs
@@ -1000,7 +1000,7 @@ while not game.over:
         enemy2.setSpeed(1,90)
         powerlevel-=1
 
-    if not keys.Pressed[K_LSHIFT] or powerlevel<0:
+    if not keys.Pressed[K_LSHIFT] or powerlevel<1:
         bullet1.setSpeed(5.3,90)
         bullet2.setSpeed(5.3,90)
         bullet3.setSpeed(5.3,90)
@@ -1010,12 +1010,18 @@ while not game.over:
         enemy1.setSpeed(y,90)
         enemy2.setSpeed(2,90)
 
-    if powerlevel<0:
+    if powerlevel<1:
         if keys.Pressed[K_LALT]:
             timeblast.visible=False
 
         if keys.Pressed[K_LCTRL]:
             forcefield.visible=False
+
+    if powerlevel<-1:
+        powerlevel+=1
+
+    if powerlevel<1:
+        powerlevel+=1
              
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
@@ -2113,5 +2119,8 @@ while not game.over:
     game.update(151)
     game.wait(K_RETURN)
     game.quit()
+    
+    game.update(151)
+game.over=False
 
 game.quit()
