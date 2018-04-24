@@ -64,6 +64,9 @@ timeblast=Animation("timeblast.png",10,game,640/10,64)
 appear=Animation("magic_002.png",15,game,960/5,576/3,4,use_alpha=False)
 boss=Image("boss.png",game)
 bossweapon=Animation("timeblast.png",10,game,640/10,64)
+victoryscreen=Image("victoryscreen.png",game)
+victoryscreen1=Image("victoryscreen1.png",game)
+victoryquit=Image("quit.png",game)
 
 game.setBackground(citybackground)
 citybackground.resizeTo(1480,820)
@@ -179,6 +182,11 @@ appear.resizeBy(-30)
 boss.resizeBy(-30)
 boss.x+=300
 boss.y+=230
+victoryscreen.resizeBy(-15)
+victoryscreen1.resizeBy(-15)
+victoryscreen1.y+=100
+victoryquit.resizeBy(-30)
+victoryquit.y+=150
 
 #Health Packs
 healthpacks=[]
@@ -1447,7 +1455,7 @@ while not game.over:
         enemy2.setSpeed(1,90)
         powerlevel-=1
 
-    if not keys.Pressed[K_LSHIFT] or power<0:
+    if not keys.Pressed[K_LSHIFT] or powerlevel<0:
         bullet1.setSpeed(5.3,90)
         bullet2.setSpeed(5.3,90)
         bullet3.setSpeed(5.3,90)
@@ -1481,7 +1489,7 @@ while not game.over:
 
     #Game Over
     if wjwalk.health<1:
-        stopgameMusic()
+        stopbossMusic()
         death.play()
         game.clearBackground()
         gameover.draw()
@@ -1916,9 +1924,6 @@ while not game.over:
         appear.visible=False
         boss.visible=True
 
-    if bosshealth<1:
-        game.over=True
-
     #Game Controls
     if wjwalk.y<700 or wjjump.y<700:
         wjwalk.y+=4
@@ -2086,7 +2091,7 @@ while not game.over:
 
     #Game Over
     if wjwalk.health<1:
-        stopgameMusic()
+        stopbossMusic()
         death.play()
         game.clearBackground()
         gameover.draw()
@@ -2094,11 +2099,19 @@ while not game.over:
         game.update(151)
         game.wait(K_RETURN)
         game.quit()
-
-    if moveon.collidedWith(mouse) and mouse.LeftClick:
-        game.over=True
-
+        
     game.update(151)
 game.over=False
+
+#Game Win
+while not game.over:
+    stopbossMusic()
+    blackbackground.draw()
+    victoryscreen.draw()
+    victoryscreen1.draw()
+    victoryquit.draw()
+    game.update(151)
+    game.wait(K_RETURN)
+    game.quit()
 
 game.quit()
