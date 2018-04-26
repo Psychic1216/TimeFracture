@@ -63,9 +63,9 @@ forcefield=Animation("forcefield.png",20,game,960/5,768/4,8)
 timeblast=Animation("timeblast.png",10,game,640/10,64)
 appear=Animation("magic_002.png",15,game,960/5,576/3,4,use_alpha=False)
 boss=Image("boss.png",game)
-bossweapon=Animation("timeblast.png",10,game,640/10,64)
-bossweapon1=Animation("plasmaball1.png",11,game,352/11,32)
 bossweapon2=Animation("timeblast.png",10,game,640/10,64)
+bossweapon1=Animation("timeblast.png",10,game,640/10,64)
+bossweapon=Animation("timeblast.png",10,game,640/10,64)
 victoryscreen=Image("victoryscreen.png",game)
 victoryscreen1=Image("victoryscreen1.png",game)
 victoryquit=Image("quit.png",game)
@@ -353,7 +353,6 @@ while not game.over:
         game.over=True
             
     game.update(151)
-    
 game.over=False
 
 #Main Meun
@@ -1642,7 +1641,7 @@ while not game.over:
     if bossfire<1:
         bossfire+=250
         bossweapon.visible=True
-        bossangleTo=bossweapon.angleTo(wjwalk)
+        bossangleTo=boss.angleTo(wjwalk)
         bossweapon.setSpeed(7.3,bossangleTo)
 
     if wjwalk.collidedWith(bossweapon,"circle"):
@@ -1763,7 +1762,7 @@ while not game.over:
         if bossfire1<1:
             bossfire1+=280
             bossweapon1.visible=True
-            bossangleTo=bossweapon1.angleTo(wjwalk)
+            bossangleTo=boss.angleTo(wjwalk)
             bossweapon1.setSpeed(7.3,bossangleTo)
 
         if wjwalk.collidedWith(bossweapon1,"circle"):
@@ -1771,15 +1770,15 @@ while not game.over:
             bossweapon1.visible=False
 
         if bossfire2>299 and not bossfire2<1:
-            bossweapon1.moveTo(boss.x,boss.y)
+            bossweapon2.moveTo(boss.x,boss.y)
     
         if bossfire2<301:
             bossfire2-=1
-
+    
         if bossfire2<1:
             bossfire2+=300
             bossweapon2.visible=True
-            bossangleTo=bossweapon2.angleTo(wjwalk)
+            bossangleTo=boss.angleTo(wjwalk)
             bossweapon2.setSpeed(7.3,bossangleTo)
 
         if wjwalk.collidedWith(bossweapon2,"circle"):
@@ -2044,7 +2043,7 @@ while not game.over:
 
     if bullet.collidedWith(boss,"rectangle"):
         bullet.visible=False
-        bosshealth-=10
+        bosshealth-=20
 
     if bullet.collidedWith(enemy,"rectangle"):
         bullet.visible=False
