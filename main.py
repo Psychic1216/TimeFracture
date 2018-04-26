@@ -1587,7 +1587,7 @@ forcefieldtime=1500
 bosshealth=1000
 bosshide=1000
 bosshide1=1000
-bosshide2=1450
+bosshide2=1000
 bossfire=250
 bossfire1=280
 bossfire2=300
@@ -1979,7 +1979,7 @@ while not game.over:
         bossweapon.visible=False
         bossweapon1.visible=False
         bossweapon2.visible=False
-        bosshide1-=1
+        bosshide2-=1
 
     if bosshide2<1:
         appear.visible=False
@@ -2074,11 +2074,13 @@ while not game.over:
     if forcefieldtime<0:
         forcefield.visible=False
 
-    if bullet1.collidedWith(forcefield,"circle") or bullet2.collidedWith(forcefield,"circle") or bullet3.collidedWith(forcefield,"circle") or bossweapon.collidedWith(forcefield,"circle"):
+    if bullet1.collidedWith(forcefield,"circle") or bullet2.collidedWith(forcefield,"circle") or bullet3.collidedWith(forcefield,"circle") or bossweapon.collidedWith(forcefield,"circle") or bossweapon1.collidedWith(forcefield,"circle") or bossweapon2.collidedWith(forcefield,"circle"):
         bullet1.visible=False
         bullet2.visible=False
         bullet3.visible=False
         bossweapon.visible=False
+        bossweapon1.visible=False
+        bossweapon2.visible=False
 
     if keys.Pressed[K_LALT]:
         timeblast.moveTo(wjwalk.x+15,wjwalk.y-30)
