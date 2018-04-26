@@ -64,7 +64,7 @@ timeblast=Animation("timeblast.png",10,game,640/10,64)
 appear=Animation("magic_002.png",15,game,960/5,576/3,4,use_alpha=False)
 boss=Image("boss.png",game)
 bossweapon=Animation("timeblast.png",10,game,640/10,64)
-bossweapon1=Animation("timeblast.png",10,game,640/10,64)
+bossweapon1=Animation("plasmaball1.png",11,game,352/11,32)
 bossweapon2=Animation("timeblast.png",10,game,640/10,64)
 victoryscreen=Image("victoryscreen.png",game)
 victoryscreen1=Image("victoryscreen1.png",game)
@@ -1024,10 +1024,10 @@ while not game.over:
             forcefield.visible=False
 
     if powerlevel<-1:
-        powerlevel+=10
+        powerlevel+=1
 
     if powerlevel<1:
-        powerlevel+=10
+        powerlevel+=1
              
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
@@ -1484,10 +1484,10 @@ while not game.over:
             forcefield.visible=False
 
     if powerlevel<-1:
-        powerlevel+=10
+        powerlevel+=1
 
     if powerlevel<1:
-        powerlevel-=10
+        powerlevel-=1
     
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
@@ -1789,11 +1789,17 @@ while not game.over:
     if bosshide1<1:
         appear.visible=False
         boss.visible=True
+        bossweapon.visible=True
+        bossweapon1.visible=True
+        bossweapon2.visible=True
 
     if bosshealth<500 and bosshide1>1:
         enemy.visible=True
         enemy1.visible=True
         enemy2.visible=True
+        bossweapon.visible=False
+        bossweapon1.visible=False
+        bossweapon2.visible=False
         
         enemy.move()
         x=randint(1,3)
@@ -1971,11 +1977,17 @@ while not game.over:
     if bosshealth<250:
         appear.visible=True
         boss.visible=False
+        bossweapon.visible=False
+        bossweapon1.visible=False
+        bossweapon2.visible=False
         bosshide1-=1
 
     if bosshide2<1:
         appear.visible=False
         boss.visible=True
+        bossweapon.visible=True
+        bossweapon1.visible=True
+        bossweapon2.visible=True
 
     #Game Controls
     if wjwalk.y<700 or wjjump.y<700:
@@ -2127,10 +2139,10 @@ while not game.over:
             forcefield.visible=False
 
     if powerlevel<-1:
-        powerlevel+=10
+        powerlevel+=1
 
     if powerlevel<1:
-        powerlevel-=10
+        powerlevel-=1
     
     if keys.Pressed[K_ESCAPE]:
         unpause.draw()
@@ -2158,6 +2170,9 @@ while not game.over:
         game.update(151)
         game.wait(K_RETURN)
         game.quit()
+
+    if bosshealth<1:
+        game.over=True
         
     game.update(151)
 game.over=False
